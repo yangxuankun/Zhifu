@@ -1,0 +1,20 @@
+server:
+  port: 7001
+
+
+eureka:
+  instance:
+    hostname: eureka7001.com #服务器名称
+  client:
+    register-with-eureka: false  #不需要将自己添加到注册中心去
+    fetch-registry: false       #表示自己就是服务端，不需要去检索服务，只需要维护服务实例
+    service-url: #访问地址
+      defaultZone: http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+
+  #server:
+    #关闭eureka的自我保护机制
+    #enable-self-preservation: false
+    #设置距上一次收到心跳后的最大等待时间（毫秒）,超过这个时间就将服务注销
+    #eviction-interval-timer-in-ms: 2000
+
+
