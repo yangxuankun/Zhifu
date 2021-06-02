@@ -1,0 +1,32 @@
+server:
+  port: 8010
+
+spring:
+  application:
+    name: cloud-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: payment8001_get    #路由id，唯一
+          #uri: http://localhost:8001       #提供服务的路由地址
+          uri: lb://CLOUD-ZHIFU-SERVICE    #使用服务名来充当路由地址，lb：负载均衡
+          predicates:     #断言，只有全部为true才转发
+            - Path=/pay/port/**   #路由地址下的具体某个服务地址
+        - id: payment8001_port
+          #uri: http://localhost:8001
+          uri: lb://CLOUD-ZHIFU-SERVICE
+          predicates:
+            - Path=/payment/get/{id}
+      discovery:
+        locator:
+          enabled: true
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka,http://eureka7003.com:7003/eureka
+  instance:
+    instance-id: gateway8010
+    prefer-ip-address: true

@@ -1,0 +1,10 @@
+server:
+  port: 8005
+
+
+spring:
+  application:
+    name: zhifu-zookeeper-order-8005
+  cloud:
+    zookeeper:
+      connect-string: 192.168.0.219:2181
